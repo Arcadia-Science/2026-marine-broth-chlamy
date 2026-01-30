@@ -1,21 +1,26 @@
-# TODO: Replace with the name of the repo
+# Marine Broth Chlamydomonas Image Processing Tools
 
 [![run with conda](https://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/projects/miniconda/en/latest/)
 
-Note: Analysis repo names should be prefixed with the year (ie `2024-noveltree-analysis`)
-
 ## Purpose
 
-TODO: Briefly describe the core analyses performed in the repository and the motivation behind them.
+This repository provides image processing tools for RGB brightfield and fluorescence microscopy analysis of *Chlamydomonas smithii* cultures grown in marine broth conditions. It includes three specialized Jupyter notebooks for correcting illumination artifacts, aligning multi-channel images, and revealing fine cellular structures in time-series data.
+
+**Associated Publication:** "Marine Broth induces extreme morphological transformations in Chlamydomonas smithii" (forthcoming)
 
 ## Installation and Setup
 
 This repository uses conda to manage software environments and installations. You can find operating system-specific instructions for installing miniconda [here](https://docs.conda.io/projects/miniconda/en/latest/). After installing conda and [mamba](https://mamba.readthedocs.io/en/latest/), run the following command to create the pipeline run environment.
 
-```{bash}
-TODO: Replace <NAME> with the name of your environment
-mamba env create -n <NAME> --file envs/dev.yml
-conda activate <NAME>
+```bash
+mamba env create -n chlamy-imaging --file envs/dev.yml
+conda activate chlamy-imaging
+```
+
+Alternatively, you can use pip to install dependencies:
+
+```bash
+pip install -r requirements.txt
 ```
 
 <details><summary>Developer Notes (click to expand/collapse)</summary>
@@ -41,26 +46,95 @@ conda activate <NAME>
 
 ## Data
 
-TODO: Add details about the description of input / output data and links to Zenodo depositions, if applicable.
+### Input Data
+
+The notebooks process fluorescence microscopy images with the following specifications:
+- **File formats**: TIF/TIFF (8-bit or 16-bit)
+- **Image types**: Grayscale, multi-channel (RGB, Cy5/TRITC, etc.), z-stacks, time series
+- **Typical image size**: 2304 × 2304 pixels
+- **Acquisition**: Images acquired using LED light engines (e.g., Lida) and fluorescence microscopy
+
+### Output Data
+
+Processed outputs include:
+- Flat-field corrected TIFF stacks
+- Aligned multi-channel images
+- Enhanced structure visualizations
+- Annotated video exports with scale bars and timestamps
 
 ## Overview
 
 ### Description of the folder structure
 
+```
+.
+├── notebooks/               # Jupyter notebooks for image processing
+│   ├── Smoothen_LIDA_RGB_TIfs.ipynb      # Flat-field illumination correction
+│   ├── realign_channels_clean.ipynb       # Multi-channel alignment
+│   └── reveal-wisps.ipynb                 # Structure enhancement & video export
+├── envs/                    # Conda environment specifications
+├── requirements.txt         # pip dependencies
+└── README.md               # This file
+```
+
+### Notebooks
+
+#### 1. Flat-Field Correction (`notebooks/Smoothen_LIDA_RGB_TIfs.ipynb`)
+
+Corrects uneven illumination from LED light engines using Gaussian blur-based background estimation.
+
+**Key features:**
+- Batch processing of multi-channel images
+- Preserves original bit depth
+- Configurable blur sigma for different correction strengths
+
+#### 2. Channel Alignment (`notebooks/realign_channels_clean.ipynb`)
+
+Interactive tool for aligning fluorescence channels affected by chromatic aberration.
+
+**Key features:**
+- Phase cross-correlation for automatic shift detection
+- Interactive sliders for manual fine-tuning
+- Real-time preview with zoom capability
+- Display-only brightness/contrast adjustments (exports preserve original intensities)
+
+#### 3. Structure Enhancement (`notebooks/reveal-wisps.ipynb`)
+
+Reveals fine cellular structures through unsharp masking, CLAHE, and temporal smoothing.
+
+**Key features:**
+- Multi-step enhancement pipeline
+- Temporal smoothing across time series
+- Annotated video export with scale bars
+- Side-by-side before/after comparisons
+
 ### Methods
 
-TODO: Include a brief, step-wise overview of analyses performed.
+1. Launch Jupyter Lab:
+   ```bash
+   jupyter lab
+   ```
 
-> Example:
->
-> 1.  Download scripts using `download.ipynb`.
-> 2.  Preprocess using `./preprocessing.sh -a data/`
-> 3.  Run Snakemake pipeline `snakemake --snakefile Snakefile`
-> 4.  Generate figures using `pub/make_figures.ipynb`.
+2. Open the desired notebook from the `notebooks/` directory
+
+3. Edit the configuration cell with your file paths and parameters
+
+4. Run cells sequentially to process images
+
+Each notebook follows a consistent workflow:
+- **Configuration Cell**: Set input/output paths and processing parameters
+- **Processing/Interactive Cell**: Run main analysis (alignment notebook includes interactive widgets)
+- **Export Cell**: Save processed results
 
 ### Compute Specifications
 
-TODO: Describe what compute resources were used to run the analysis. For example, you could list the operating system, number of cores, RAM, and storage space.
+These notebooks were developed and tested on:
+- **Operating System**: macOS (Darwin 23.5.0)
+- **Hardware**: Standard desktop/laptop computing resources
+- **RAM**: 16+ GB recommended for processing large image stacks
+- **Storage**: Variable depending on dataset size; processed outputs typically similar in size to inputs
+
+Processing time depends on image dimensions and stack depth. Typical operations complete within minutes on modern hardware.
 
 ## Contributing
 
