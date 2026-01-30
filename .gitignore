@@ -82,3 +82,21 @@ venv/
 # Nextflow related folders and files
 .nextflow*
 work/
+
+# macOS resource forks
+._*
+.AppleDouble
+.LSOverride
+
+# Project specific - processed image outputs
+corrected/
+*_corrected.tif
+*_aligned*.tif
+*_processed*.tif
+*_processed*.mp4
+
+# Large image data (uncomment if not tracking raw data)
+# *.tif
+# *.tiff
+# *.mp4
+# *.avi
