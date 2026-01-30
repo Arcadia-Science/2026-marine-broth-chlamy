@@ -4,7 +4,7 @@
 
 ## Purpose
 
-This repository provides image processing tools for fluorescence microscopy analysis of *Chlamydomonas smithii* cultures grown in marine broth conditions. It includes three specialized Jupyter notebooks for correcting illumination artifacts, aligning multi-channel images, and revealing fine cellular structures in time-series data.
+This repository provides image processing tools for RGB brightfield and fluorescence microscopy analysis of *Chlamydomonas smithii* cultures grown in marine broth conditions. It includes three specialized Jupyter notebooks for correcting illumination artifacts, aligning multi-channel images, and revealing fine cellular structures in time-series data.
 
 **Associated Publication:** "Marine Broth induces extreme morphological transformations in Chlamydomonas smithii" (forthcoming)
 
