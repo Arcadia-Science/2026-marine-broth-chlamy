@@ -12,12 +12,12 @@ Usage:
     3. Run script: python reveal_wisps.py
 """
 
-import numpy as np
 import cv2
 import matplotlib.pyplot as plt
+import numpy as np
 import tifffile
+from PIL import Image, ImageDraw, ImageFont
 from scipy.ndimage import gaussian_filter
-from PIL import ImageFont, ImageDraw, Image
 
 # =============================================================================
 # CONFIGURATION

@@ -12,11 +12,12 @@ Usage:
     4. Run script: python smoothen_lida_rgb_tifs.py
 """
 
-import numpy as np
 from pathlib import Path
-from skimage import io, img_as_float, img_as_uint, img_as_ubyte
-from scipy.ndimage import gaussian_filter
+
+import numpy as np
 import tifffile
+from scipy.ndimage import gaussian_filter
+from skimage import img_as_float, img_as_ubyte, img_as_uint, io
 
 # =============================================================================
 # CONFIGURATION
