@@ -17,7 +17,6 @@ from pathlib import Path
 import numpy as np
 import tifffile
 from scipy.ndimage import gaussian_filter
-from skimage import img_as_float, img_as_ubyte, img_as_uint, io
 
 # =============================================================================
 # CONFIGURATION
@@ -33,6 +32,7 @@ clip_percentile = 0.1
 # =============================================================================
 # PROCESSING FUNCTIONS
 # =============================================================================
+
 
 def correct_channel(channel, sigma=100):
     """Flat-field correct a single channel by dividing by blurred version."""
@@ -86,6 +86,7 @@ def process_file(input_path, output_path, sigma=100):
 # =============================================================================
 # MAIN
 # =============================================================================
+
 
 def main():
     input_path = Path(input_dir)
