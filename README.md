@@ -6,7 +6,9 @@
 
 This repository provides image processing tools for RGB brightfield and fluorescence microscopy analysis of *Chlamydomonas smithii* cultures grown in marine broth conditions. It includes two Python scripts for batch processing (flat-field correction and structure enhancement) and one interactive Jupyter notebook for multi-channel image alignment with example data.
 
-**Associated Publication:** "Marine Broth induces extreme morphological transformations in Chlamydomonas smithii" (forthcoming)
+**Associated Publication:** "Marine Broth induces extreme morphological transformations in Chlamydomonas smithii" https://doi.org/10.57844/arcadia-q58n-51bk
+
+**Associated Data:** Microscopy data is available on the BioImage Archive doi: 10.6019/S-BIAD2873
 
 ## Installation and Setup
 
