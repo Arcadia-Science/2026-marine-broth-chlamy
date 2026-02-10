@@ -56,6 +56,9 @@ Example images are provided in the `data/` directory to demonstrate the channel 
 
 These are 23-slice z-stacks (388 × 304 pixels, 16-bit) showing chromatic aberration that can be corrected using the alignment notebook.
 
+- `Sample_Wisp_Timelapse.tif` - Grayscale timelapse of a wisp extending from a cell body (to be revealed). This is a 50 frame snippet of the file "MB_1xMT_30min_NoWash_TL_002.nd" available on BioImage Archive (DOI: 10.6019/S-BIAD2873)
+
+
 ### Input Data
 
 The tools process fluorescence microscopy images with the following specifications:
