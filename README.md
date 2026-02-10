@@ -56,7 +56,9 @@ Example images are provided in the `data/` directory to demonstrate the channel 
 
 These are 23-slice z-stacks (388 × 304 pixels, 16-bit) showing chromatic aberration that can be corrected using the alignment notebook.
 
-- `Sample_Wisp_Timelapse.tif` - Grayscale timelapse of a wisp extending from a cell body (to be revealed). This is a 50 frame snippet of the file "MB_1xMT_30min_NoWash_TL_002.nd" available on BioImage Archive (DOI: 10.6019/S-BIAD2873)
+- `Sample_Wisp_Timelapse.tif` - Grayscale timelapse of a wisp extending from a cell body (to be revealed). This is a 10 frame snippet of the file "MB_1xMT_30min_NoWash_TL_002.nd" available on BioImage Archive (DOI: 10.6019/S-BIAD2873)
+- `Sample_LIDA.tif` - RGB composite image of Chlamydomonas cells grown on water + agar and imaged with the LIDA light engine. A Red to Blue gradient covers the field of view.
+
 
 
 ### Input Data
@@ -83,7 +85,9 @@ Processed outputs include:
 .
 ├── data/                    # Example microscopy images
 │   ├── Sample_Chlorophyll_Cy5.tif        # Example chlorophyll channel
-│   └── Sample_PKmito_TRITC.tif           # Example mitochondrial channel
+|   ├── Sample_LIDA.tif                   # Example RGB composite image
+│   ├── Sample_PKmito_TRITC.tif           # Example mitochondrial channel
+|   └── Sample_Wisp_Timelapse.tif         # Example timelapse of motile wisps  
 ├── notebooks/               # Interactive Jupyter notebooks
 │   └── realign_channels_clean.ipynb      # Multi-channel alignment (with examples)
 ├── scripts/                 # Python scripts for batch processing
@@ -98,7 +102,7 @@ Processed outputs include:
 
 #### 1. Flat-Field Correction (`scripts/smoothen_lida_rgb_tifs.py`)
 
-Python script for batch correction of uneven illumination from LED light engines using Gaussian blur-based background estimation.
+Python script for batch correction of uneven illumination from LED light engines using Gaussian blur-based background estimation. **Includes example data** to demonstrate the workflow.
 
 **Key features:**
 - Batch processing of multi-channel images
@@ -130,7 +134,7 @@ The notebook is pre-configured to run on the example data. Edit the configuratio
 
 #### 3. Structure Enhancement (`scripts/reveal_wisps.py`)
 
-Python script for revealing fine cellular structures through unsharp masking, CLAHE, and temporal smoothing.
+Python script for revealing fine cellular structures through unsharp masking, CLAHE, and temporal smoothing. **Includes example data** to demonstrate workflow.
 
 **Key features:**
 - Multi-step enhancement pipeline
