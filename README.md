@@ -16,7 +16,8 @@ This repository uses conda to manage software environments and installations. Yo
 
 ```bash
 mamba env create -n chlamy-imaging --file envs/dev.yml
-conda activate chlamy-imaging
+mamba env create -n 2026-marine-broth-chlamy --file envs/dev.yml
+conda activate 2026-marine-broth-chlamy
 ```
 
 Alternatively, you can use pip to install dependencies:
