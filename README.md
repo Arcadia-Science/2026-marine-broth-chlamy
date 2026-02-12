@@ -96,7 +96,7 @@ Processed outputs include:
 │   └── smoothen_lida_rgb_tifs.py         # Flat-field illumination correction
 ├── envs/                    # Conda environment specifications
 ├── requirements.txt         # pip dependencies
-└── README.md               # This file
+└── README.md
 ```
 
 ### Tools
