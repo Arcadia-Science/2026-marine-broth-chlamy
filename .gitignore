@@ -66,6 +66,7 @@ target/
 # Pycharm and VSCode
 .idea/
 venv/
+.venv/
 
 # Jupyter notebook checkpoints
 .ipynb_checkpoints
@@ -90,6 +91,7 @@ work/
 
 # Project specific - processed image outputs
 corrected/
+results/
 *_corrected.tif
 *_aligned*.tif
 *_processed*.tif
