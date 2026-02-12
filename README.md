@@ -51,7 +51,7 @@ pip install -r requirements.txt
 
 ### Example Data
 
-Example images are provided in the `data/` directory to demonstrate the channel alignment workflow:
+Example images are provided in the `data/` directory to demonstrate the channel alignment workflow. Both images are from the same z-stack acquired with different fluorescence channels:
 - `Sample_Chlorophyll_Cy5.tif` - Chlorophyll autofluorescence channel (reference)
 - `Sample_PKmito_TRITC.tif` - Mitochondrial marker channel (to be aligned)
 
