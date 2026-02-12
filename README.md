@@ -118,7 +118,7 @@ Edit the configuration section at the top of the script to set your input direct
 
 #### 2. Channel Alignment (`notebooks/realign_channels_clean.ipynb`)
 
-Interactive Jupyter notebook for aligning fluorescence channels affected by chromatic aberration. **Includes example data** to demonstrate the workflow.
+Interactive Jupyter notebook for aligning fluorescence channels affected by chromatic aberration. Includes example data to demonstrate the workflow.
 
 **Key features:**
 - Phase cross-correlation for automatic shift detection
