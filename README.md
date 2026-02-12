@@ -51,14 +51,17 @@ pip install -r requirements.txt
 
 ### Example Data
 
-Example images are provided in the `data/` directory to demonstrate the channel alignment workflow. Both images are from the same z-stack acquired with different fluorescence channels:
+Example images are provided in the `data/` directory to demonstrate the channel alignment workflow. Example data has been cropped to reduce the file size in this repo. Full data is available at https://www.ebi.ac.uk/biostudies/bioimages/studies/S-BIAD2873.
+
+These are 23-slice z-stacks (388 × 304 pixels, 16-bit) showing chromatic aberration that can be corrected using the alignment notebook (realign_channels_clean.ipynb). Both images are from the same z-stack acquired with different fluorescence channels. The raw ND2 source file is available as MB_10xPK_30min_NoWash_Fluor_zstack_005.nd2 on BioImage Archive (DOI: 10.6019/S-BIAD2873).
 - `Sample_Chlorophyll_Cy5.tif` - Chlorophyll autofluorescence channel (reference)
 - `Sample_PKmito_TRITC.tif` - Mitochondrial marker channel (to be aligned)
 
-These are 23-slice z-stacks (388 × 304 pixels, 16-bit) showing chromatic aberration that can be corrected using the alignment notebook.
+Grayscale timelapse of a wisp extending from a cell body. This is an example file to run reveal_wisps.py. This is a 10 frame snippet of the file "MB_1xMT_30min_NoWash_TL_002.nd" available on BioImage Archive (DOI: 10.6019/S-BIAD2873). 
+- `Sample_Wisp_Timelapse.tif`
 
-- `Sample_Wisp_Timelapse.tif` - Grayscale timelapse of a wisp extending from a cell body (to be revealed). This is a 10 frame snippet of the file "MB_1xMT_30min_NoWash_TL_002.nd" available on BioImage Archive (DOI: 10.6019/S-BIAD2873)
-- `Sample_LIDA.tif` - RGB composite image of Chlamydomonas cells grown on water + agar and imaged with the LIDA light engine. A Red to Blue gradient covers the field of view.
+RGB composite image of Chlamydomonas cells grown on water + agar and imaged with the LIDA light engine. A Red to Blue gradient covers the field of view. smoothen_lida_rgb_tifs.py can be used to remove this background gradient. The raw ND2 file can be found in the "40-day cultures across media types" study component on BioImage Archive (DOI: 10.6019/S-BIAD2873) as Water_001.nd2.
+- `Sample_LIDA.tif` 
 
 
 
@@ -111,10 +114,12 @@ Python script for batch correction of uneven illumination from LED light engines
 - Configurable blur sigma for different correction strengths
 
 **Usage:**
+
+Edit the configuration section at the top of the script to set your input directory and parameters.
+
 ```bash
 python scripts/smoothen_lida_rgb_tifs.py
 ```
-Edit the configuration section at the top of the script to set your input directory and parameters.
 
 #### 2. Channel Alignment (`notebooks/realign_channels_clean.ipynb`)
 
@@ -149,42 +154,6 @@ python scripts/reveal_wisps.py
 ```
 Edit the configuration section at the top of the script to set your file paths and parameters.
 
-### Usage
-
-#### For Python Scripts (Batch Processing)
-
-1. Edit the configuration section at the top of the script with your file paths and parameters
-
-2. Run the script:
-   ```bash
-   python scripts/smoothen_lida_rgb_tifs.py
-   # or
-   python scripts/reveal_wisps.py
-   ```
-
-Scripts follow a consistent structure:
-- **Configuration Section**: Set input/output paths and processing parameters at the top
-- **Processing Functions**: Main image processing logic
-- **Main Block**: Batch processing loop
-
-#### For Interactive Notebook (Channel Alignment)
-
-1. Launch Jupyter Lab:
-   ```bash
-   jupyter lab
-   ```
-
-2. Open `notebooks/realign_channels_clean.ipynb`
-
-3. Run the notebook with example data (pre-configured) or edit the configuration cell for your own images
-
-4. Use interactive sliders to fine-tune alignment, then export results
-
-The notebook workflow:
-- **Configuration Cell**: Set input/output paths (defaults to example data)
-- **Interactive Cell**: Load images and use sliders to find optimal alignment
-- **Export Cell**: Save aligned results
-
 ### Compute Specifications
 
 These notebooks were developed and tested on:
@@ -198,23 +167,3 @@ Processing time depends on image dimensions and stack depth. Typical operations 
 ## Contributing
 
 See how we recognize [feedback and contributions to our code](https://github.com/Arcadia-Science/arcadia-software-handbook/blob/main/guides-and-standards/guide--credit-for-contributions.md).
-
----
-## For Developers
-
-This section contains information for developers who are working off of this template. Please adjust or edit this section as appropriate when you're ready to share your repo.
-
-### GitHub templates
-This template uses GitHub templates to provide checklists when making new pull requests. These templates are stored in the [.github/](./.github/) directory.
-
-### VSCode
-This template includes recommendations to VSCode users for extensions, particularly the `ruff` linter. These recommendations are stored in `.vscode/extensions.json`. When you open the repository in VSCode, you should see a prompt to install the recommended extensions.
-
-### `.gitignore`
-This template uses a `.gitignore` file to prevent certain files from being committed to the repository.
-
-### `pyproject.toml`
-`pyproject.toml` is a configuration file to specify your project's metadata and to set the behavior of other tools such as linters, type checkers etc. You can learn more [here](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)
-
-### Linting
-This template automates linting and formatting using GitHub Actions and the `ruff` linter. When you push changes to your repository, GitHub will automatically run the linter and report any errors, blocking merges until they are resolved.
