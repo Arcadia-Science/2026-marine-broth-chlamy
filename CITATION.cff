@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: If you use this software, please cite the associated publication.
+title: Morphological transformation of Chlamydomonas smithii grown in Marine Broth
+  medium
+doi: 10.57844/arcadia-q58n-51bk
+authors:
+- family-names: Lane
+  given-names: Ryan
+  affiliation: Arcadia Science
+  orcid: https://orcid.org/0000-0002-5887-2069
+- family-names: MacQuarrie
+  given-names: Cameron Dale
+  affiliation: Arcadia Science
+  orcid: https://orcid.org/0000-0001-9504-6375
+- family-names: Mets
+  given-names: David G.
+  affiliation: Arcadia Science
+  orcid: https://orcid.org/0000-0002-0803-0912
+preferred-citation:
+  title: Morphological transformation of Chlamydomonas smithii grown in Marine Broth
+    medium
+  type: article
+  doi: 10.57844/arcadia-q58n-51bk
+  authors:
+  - family-names: MacQuarrie
+    given-names: Cameron Dale
+    affiliation: Arcadia Science
+    orcid: https://orcid.org/0000-0001-9504-6375
+  - family-names: Mets
+    given-names: David G.
+    affiliation: Arcadia Science
+    orcid: https://orcid.org/0000-0002-0803-0912
+  year: 2026
