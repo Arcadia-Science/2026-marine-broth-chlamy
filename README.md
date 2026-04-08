@@ -113,11 +113,11 @@ Python script for batch correction of uneven illumination from LED light engines
 **Usage:**
 
 ```bash
-python scripts/smoothen_lida_rgb_tifs.py                    # process example data
-python scripts/smoothen_lida_rgb_tifs.py --input-dir mydir  # custom directory
+uv run python scripts/smoothen_lida_rgb_tifs.py                    # process example data
+uv run python scripts/smoothen_lida_rgb_tifs.py --input-dir mydir  # custom directory
 ```
 
-Run `python scripts/smoothen_lida_rgb_tifs.py --help` for all options. Processing parameters can be adjusted at the top of the script.
+Run `uv run python scripts/smoothen_lida_rgb_tifs.py --help` for all options. Processing parameters can be adjusted at the top of the script.
 
 #### 2. Channel Alignment (`notebooks/realign_channels_clean.ipynb`)
 
@@ -132,7 +132,7 @@ Interactive Jupyter notebook for aligning fluorescence channels affected by chro
 
 **Usage:**
 ```bash
-jupyter lab notebooks/realign_channels_clean.ipynb
+uv run jupyter lab notebooks/realign_channels_clean.ipynb
 ```
 The notebook is pre-configured to run on the example data. Edit the configuration cell to process your own images.
 
@@ -148,11 +148,11 @@ Python script for revealing fine cellular structures through unsharp masking, CL
 
 **Usage:**
 ```bash
-python scripts/reveal_wisps.py                        # process example data
-python scripts/reveal_wisps.py --input my_stack.tif   # custom input
+uv run python scripts/reveal_wisps.py                        # process example data
+uv run python scripts/reveal_wisps.py --input my_stack.tif   # custom input
 ```
 
-Run `python scripts/reveal_wisps.py --help` for all options. Processing parameters can be adjusted at the top of the script.
+Run `uv run python scripts/reveal_wisps.py --help` for all options. Processing parameters can be adjusted at the top of the script.
 
 ### Compute Specifications
 
