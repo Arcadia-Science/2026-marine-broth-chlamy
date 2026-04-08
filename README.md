@@ -1,6 +1,6 @@
 # Marine Broth Chlamydomonas Image Processing Tools
 
-[![run with conda](https://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/projects/miniconda/en/latest/)
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 
 ## Purpose
 
@@ -12,39 +12,36 @@ This repository provides image processing tools for RGB brightfield and fluoresc
 
 ## Installation and Setup
 
-This repository uses conda to manage software environments and installations. You can find operating system-specific instructions for installing miniconda [here](https://docs.conda.io/projects/miniconda/en/latest/). After installing conda and [mamba](https://mamba.readthedocs.io/en/latest/), run the following command to create the pipeline run environment.
+This repository uses [uv](https://docs.astral.sh/uv/) to manage dependencies and virtual environments. Install uv following the [official instructions](https://docs.astral.sh/uv/getting-started/installation/), then run:
 
 ```bash
-mamba env create -n chlamy-imaging --file envs/dev.yml
-mamba env create -n 2026-marine-broth-chlamy --file envs/dev.yml
-conda activate 2026-marine-broth-chlamy
+uv sync
 ```
 
-Alternatively, you can use pip to install dependencies:
+This creates a `.venv` virtual environment and installs all runtime dependencies. To also install dev tools (ruff, pre-commit):
 
 ```bash
-pip install -r requirements.txt
+uv sync --group dev
 ```
 
 <details><summary>Developer Notes (click to expand/collapse)</summary>
 
 1. Install your pre-commit hooks:
 
-    ```{bash}
-    pre-commit install
+    ```bash
+    uv run pre-commit install
     ```
 
     This installs the pre-commit hooks defined in your config (`./.pre-commit-config.yaml`).
 
-2. Export your conda environment before sharing:
+2. Adding new dependencies:
 
-    As your project develops, the number of dependencies in your environment may increase. Whenever you install new dependencies (using either `pip install` or `mamba install`), you should update the environment file using the following command.
-
-    ```{bash}
-    conda env export --no-builds > envs/dev.yml
+    ```bash
+    uv add <package>              # runtime dependency
+    uv add --group dev <package>  # dev-only dependency
     ```
 
-    `--no-builds` removes build specification from the exported packages to increase portability between different platforms.
+    This updates `pyproject.toml` and `uv.lock` automatically.
 </details>
 
 ## Data
@@ -97,8 +94,8 @@ Processed outputs include:
 ├── scripts/                 # Python scripts for batch processing
 │   ├── reveal_wisps.py                   # Structure enhancement & video export
 │   └── smoothen_lida_rgb_tifs.py         # Flat-field illumination correction
-├── envs/                    # Conda environment specifications
-├── requirements.txt         # pip dependencies
+├── pyproject.toml           # Project metadata and dependencies
+├── uv.lock                  # Locked dependency versions
 └── README.md
 ```
 
@@ -106,7 +103,7 @@ Processed outputs include:
 
 #### 1. Flat-Field Correction (`scripts/smoothen_lida_rgb_tifs.py`)
 
-Python script for batch correction of uneven illumination from LED light engines using Gaussian blur-based background estimation. **Includes example data** to demonstrate the workflow.
+Python script for batch correction of uneven illumination from LED light engines using Gaussian blur-based background estimation. Defaults to processing example data in `data/`.
 
 **Key features:**
 - Batch processing of multi-channel images
@@ -115,11 +112,12 @@ Python script for batch correction of uneven illumination from LED light engines
 
 **Usage:**
 
-Edit the configuration section at the top of the script to set your input directory and parameters.
-
 ```bash
-python scripts/smoothen_lida_rgb_tifs.py
+uv run python scripts/smoothen_lida_rgb_tifs.py                    # process example data
+uv run python scripts/smoothen_lida_rgb_tifs.py --input-dir mydir  # custom directory
 ```
+
+Run `uv run python scripts/smoothen_lida_rgb_tifs.py --help` for all options. Processing parameters can be adjusted at the top of the script.
 
 #### 2. Channel Alignment (`notebooks/realign_channels_clean.ipynb`)
 
@@ -134,13 +132,13 @@ Interactive Jupyter notebook for aligning fluorescence channels affected by chro
 
 **Usage:**
 ```bash
-jupyter lab notebooks/realign_channels_clean.ipynb
+uv run jupyter lab notebooks/realign_channels_clean.ipynb
 ```
 The notebook is pre-configured to run on the example data. Edit the configuration cell to process your own images.
 
 #### 3. Structure Enhancement (`scripts/reveal_wisps.py`)
 
-Python script for revealing fine cellular structures through unsharp masking, CLAHE, and temporal smoothing. **Includes example data** to demonstrate workflow.
+Python script for revealing fine cellular structures through unsharp masking, CLAHE, and temporal smoothing. Defaults to processing example data in `data/Sample_Wisp_Timelapse.tif`.
 
 **Key features:**
 - Multi-step enhancement pipeline
@@ -150,9 +148,11 @@ Python script for revealing fine cellular structures through unsharp masking, CL
 
 **Usage:**
 ```bash
-python scripts/reveal_wisps.py
+uv run python scripts/reveal_wisps.py                        # process example data
+uv run python scripts/reveal_wisps.py --input my_stack.tif   # custom input
 ```
-Edit the configuration section at the top of the script to set your file paths and parameters.
+
+Run `uv run python scripts/reveal_wisps.py --help` for all options. Processing parameters can be adjusted at the top of the script.
 
 ### Compute Specifications
 

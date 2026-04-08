@@ -102,3 +102,6 @@ results/
 # *.tiff
 # *.mp4
 # *.avi
+
+# VSCode settings
+.vscode/

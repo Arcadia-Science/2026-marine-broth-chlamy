@@ -6,33 +6,25 @@ Corrects spatial gradients from uneven illumination (e.g., LED light engines lik
 by dividing each channel by its blurred version.
 
 Usage:
-    1. Set input_dir to folder containing your images
-    2. Configure normalization strategy based on your image type:
-       - preserve_color_balance=True for RGB brightfield images
-       - preserve_color_balance=False for multi-channel fluorescence
-    3. Adjust blur_sigma if needed (larger = gentler correction)
-    4. Run: python smoothen_lida_rgb_tifs.py
+    python scripts/smoothen_lida_rgb_tifs.py                    # uses example data
+    python scripts/smoothen_lida_rgb_tifs.py --input-dir mydir  # custom directory
 """
 
+import argparse
 from pathlib import Path
 
 import numpy as np
 import tifffile
 from scipy.ndimage import gaussian_filter
 
+REPO_ROOT = Path(__file__).resolve().parent.parent
+
 # =============================================================================
-# CONFIGURATION
+# CONFIGURATION — correction parameters (edit as needed)
 # =============================================================================
 
-input_dir = "/path/to/your/image/folder"
-output_dir = None  # None = creates "corrected" subfolder in input_dir
-file_pattern = "*.tif"
-
-# Correction parameters
 blur_sigma = 100  # Larger = gentler correction
 clip_percentile = 0.1  # Clip top 0.1% to prevent outliers from skewing normalization
-
-# Normalization strategy
 preserve_color_balance = True  # True: RGB photos | False: fluorescence multi-channel
 
 # =============================================================================
@@ -177,18 +169,40 @@ def process_file(
 
 def main() -> None:
     """Main processing loop."""
-    input_path = Path(input_dir)
+    parser = argparse.ArgumentParser(
+        description="Flat-field correction for uneven illumination in microscopy images."
+    )
+    parser.add_argument(
+        "--input-dir",
+        type=Path,
+        default=REPO_ROOT / "data",
+        help="Directory containing TIF images (default: data/)",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=None,
+        help="Output directory (default: <input-dir>/corrected)",
+    )
+    parser.add_argument(
+        "--file-pattern",
+        default="Sample_LIDA.tif",
+        help="Glob pattern for input files (default: Sample_LIDA.tif)",
+    )
+    args = parser.parse_args()
 
-    if output_dir is None:
+    input_path = args.input_dir
+
+    if args.output_dir is None:
         output_path = input_path / "corrected"
     else:
-        output_path = Path(output_dir)
+        output_path = args.output_dir
 
     output_path.mkdir(parents=True, exist_ok=True)
-    files = sorted(input_path.glob(file_pattern))
+    files = sorted(input_path.glob(args.file_pattern))
 
     if not files:
-        print(f"No files matching '{file_pattern}' found in {input_path}")
+        print(f"No files matching '{args.file_pattern}' found in {input_path}")
         return
 
     print(f"Found {len(files)} files to process")
