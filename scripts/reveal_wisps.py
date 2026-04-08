@@ -184,7 +184,14 @@ def main() -> None:
     plt.imshow(final_stack[n_frames // 2], cmap="gray")
     plt.title("Final Processed Frame")
     plt.axis("off")
-    plt.show()
+
+    output_sample = output_dir / f"{stem}_sample.png"
+    plt.savefig(output_sample)
+    print(f"Sample figure saved to: {output_sample}")
+    try:
+        plt.show()
+    except Exception:
+        print("No display available; skipping interactive plot.")
 
 
 if __name__ == "__main__":
