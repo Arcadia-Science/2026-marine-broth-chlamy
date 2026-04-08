@@ -186,8 +186,8 @@ def main() -> None:
     )
     parser.add_argument(
         "--file-pattern",
-        default="*.tif",
-        help="Glob pattern for input files (default: *.tif)",
+        default="Sample_LIDA.tif",
+        help="Glob pattern for input files (default: Sample_LIDA.tif)",
     )
     args = parser.parse_args()
 
