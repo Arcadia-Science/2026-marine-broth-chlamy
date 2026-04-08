@@ -15,6 +15,7 @@ import argparse
 from pathlib import Path
 
 import cv2
+import matplotlib.font_manager as fm
 import matplotlib.pyplot as plt
 import numpy as np
 import tifffile
@@ -38,8 +39,19 @@ time_per_frame = 0.05868  # seconds
 pixel_size = 0.1625  # microns/pixel
 scale_bar_microns = 10
 scale_bar_height = 5
-font_path = "/System/Library/Fonts/SFNSMono.ttf"
 font_size = 16
+
+
+def _find_monospace_font() -> str | None:
+    """Find a monospace font available on the current platform."""
+    for family in ("DejaVu Sans Mono", "Courier New", "Liberation Mono"):
+        path = fm.findfont(fm.FontProperties(family=family), fallback_to_default=False)
+        if path:
+            return path
+    return None
+
+
+font_path = _find_monospace_font()
 
 
 def main() -> None:
@@ -116,7 +128,7 @@ def main() -> None:
     # =========================================================================
 
     try:
-        font = ImageFont.truetype(font_path, font_size)
+        font = ImageFont.truetype(font_path, font_size) if font_path else ImageFont.load_default()
     except Exception:
         print("Custom font not found, using default")
         font = ImageFont.load_default()
